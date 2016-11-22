@@ -29,8 +29,7 @@ struct image
 
 extern struct options options;
 
-void set_pixel_from_iteration_count(int image_row, int image_column, int
-    iterations);
+void set_pixel_from_iteration_count(int image_row, int image_column, double iterations);
 void create_blank_image(void);
 void save_image(const char *filename);
 
