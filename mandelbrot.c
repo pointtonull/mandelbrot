@@ -22,9 +22,9 @@ void parse_options(int argc, char *argv[])
             printf("Valid syntax:\n");
             printf("    ./mandel-basic level [x_pos [y_pos [iterations]]]\n");
             printf("e.g:\n");
-            printf("    ./mandel-basic 1\n");
+            printf("    ./mandelbrot 1\n");
             printf("    ./mandelbrot 16 .35\n");
-            printf("    ./mandel-basic 16 -1.75 0 200\n");
+            printf("    ./mandelbrot 16 -1.75 0 200\n");
             exit(1);
             break;
     }
