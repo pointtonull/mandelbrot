@@ -1,5 +1,5 @@
-CC = gcc -std=c99 -fopenmp
-CFLAGS = -Wall -O0 -g
+#CC = gcc
+CFLAGS = -std=c99 -fopenmp -Wall -O0 -g
 LDLIBS = -lm
 SRC = mandelbrot.c algorithm.c
 OBJ = $(SRC:.c=.o)
