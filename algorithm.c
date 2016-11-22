@@ -1,22 +1,23 @@
 #include "algorithm.h"
 #include "complex.h"
+#include <math.h>
 
 
 static struct image image = {0, 0, NULL};
 
 
-int iterate_point(double complex c)
+double complex mandelbrot(int n, double complex c)
 {
-    int iterations;
     double complex z;
-    iterations = 0;
-    z = 0.0;
-    while (cabs(z) < 2 && iterations < options.max_iterations)
-    {
-        z = z * z + c;
-        iterations += 1;
+
+    if (n <= 0)
+        return c;
+    else {
+        z = mandelbrot(n - 1, c);
+        if (cabs(z) <= 2)
+            z = z * z + c;
+        return z;
     }
-    return iterations;
 }
 
 
@@ -31,7 +32,7 @@ void generate_mandelbrot_subimage(int row1, int row2, int col1, int col2)
 {
     double x, y, x1, y1;
     int image_row, image_col;
-    int iterations;
+    double iterations;
     double complex z;
 
     y1 = cimag(options.center) + (options.pixel_size *
