@@ -48,22 +48,43 @@ void generate_mandelbrot_subimage(int row1, int row2, int col1, int col2)
             y = y1 - image_row * options.pixel_size;
             x = x1 + image_col * options.pixel_size;
             z = x + y * I;
-            iterations = iterate_point(z);
+            iterations = cabs(mandelbrot(options.max_iterations, z));
             set_pixel_from_iteration_count(image_row, image_col, iterations);
         }
     }
 }
 
 
-void set_pixel_from_iteration_count(int image_row, int image_col, int
-        iterations)
+void set_pixel_from_iteration_count(int image_row, int image_col, double value)
 {
     unsigned char *pixel;
 
     pixel = image.pixels + 3 * image_row * image.width + 3 * image_col;
-    pixel[0] = (13 * iterations) % 256;
-    pixel[1] = (5 * iterations) % 256;
-    pixel[2] = (11 * iterations) % 256;
+    value *= 6;
+
+    if (value < 16)
+    {
+        pixel[0] = value * 8;
+        pixel[1] = value * 8;
+        pixel[2] = 128 + value * 4;
+    }
+    if (value >= 16 && value < 64)
+    {
+        pixel[0] = 128 + value - 16;
+        pixel[1] = 128 + value - 16;
+        pixel[2] = 192 + value - 16;
+    }
+    if (value >= 64)
+    {
+        pixel[0] = 319 - value;
+        pixel[1] = 128 + (319 - value) / 2;
+        pixel[2] = 319 - value;
+    }
+
+    pixel[0] %= 256;
+    pixel[1] %= 256;
+    pixel[2] %= 256;
+
 }
 
 
